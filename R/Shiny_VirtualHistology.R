@@ -12,7 +12,7 @@
 library("shiny"); library("dplyr"); library("magrittr"); 
 library("ggplot2"); library("tidyr"); library("scales"); 
 library("ggridges"); library("purrr"); library("DT")
-library(ggseg)
+library(ggseg); library(here)
 
 outdir <- here::here()
 load(paste0(outdir, "/data/db.Rda" ))

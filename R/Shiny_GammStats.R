@@ -8,7 +8,7 @@
 ###### loading data ######
 # .......................#
 library(shiny);library(dplyr);library(magrittr);library(ggplot2);library(tidyr);
-library(ggseg)
+library(ggseg); library(here)
 
 outdir <- here::here()
 load(paste0(outdir, "/data/gamm.stats.Rda"))

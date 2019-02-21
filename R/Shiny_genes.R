@@ -10,7 +10,7 @@
 ###### loading data ######
 # .......................#
 library(shiny);library(dplyr);library(magrittr);library(ggplot2);
-library(DT)
+library(DT); library(here)
 
 outdir <- here::here()
 load(paste0(outdir, "/data/GeneTable2Shiny.Rda"))

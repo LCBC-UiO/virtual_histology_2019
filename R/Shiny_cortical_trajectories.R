@@ -8,7 +8,7 @@
 ###### loading data ######
 # -----------------------#
 library("shiny"); library("dplyr"); library("magrittr"); 
-library("ggplot2"); 
+library("ggplot2"); library(here)
 
 outdir <- here::here()
 load(paste0(outdir,"/data/db.Rda" ))

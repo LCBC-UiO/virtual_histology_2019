@@ -1,0 +1,12 @@
+---
+title: "Virtual histology"
+author: "Didac Vidal Piñeiro"
+date: "2/21/2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LCBC-UiO/virtual_histology_2019/master?filepath=VH_didac.Rmd)
