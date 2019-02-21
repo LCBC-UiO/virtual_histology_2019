@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1550497267645.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2215133167",
+    "id" : "4510A3C2",
+    "lastKnownWriteTime" : 1550499764,
+    "last_content_update" : 1550499764129,
+    "path" : "~/Desktop/R-stuff/LCBC/VH_didac/R/Shiny_GammStats.R",
+    "project_path" : "R/Shiny_GammStats.R",
+    "properties" : {
+        "cursorPosition" : "12,22",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

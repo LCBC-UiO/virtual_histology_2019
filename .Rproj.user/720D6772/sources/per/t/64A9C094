@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1550497268385.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2905872346",
+    "id" : "64A9C094",
+    "lastKnownWriteTime" : 1550499757,
+    "last_content_update" : 1550499757944,
+    "path" : "~/Desktop/R-stuff/LCBC/VH_didac/R/Shiny_genes.R",
+    "project_path" : "R/Shiny_genes.R",
+    "properties" : {
+        "cursorPosition" : "15,22",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

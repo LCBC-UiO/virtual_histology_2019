@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1550497269719.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2870503132",
+    "id" : "DE8CBE20",
+    "lastKnownWriteTime" : 1550499707,
+    "last_content_update" : 1550499707674,
+    "path" : "~/Desktop/R-stuff/LCBC/VH_didac/R/Shiny_GO.R",
+    "project_path" : "R/Shiny_GO.R",
+    "properties" : {
+        "cursorPosition" : "14,24",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

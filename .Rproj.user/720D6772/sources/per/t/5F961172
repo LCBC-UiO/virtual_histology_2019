@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1550497270875.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3630245425",
+    "id" : "5F961172",
+    "lastKnownWriteTime" : 1550499714,
+    "last_content_update" : 1550499714513,
+    "path" : "~/Desktop/R-stuff/LCBC/VH_didac/R/Shiny_VirtualHistology.R",
+    "project_path" : "R/Shiny_VirtualHistology.R",
+    "properties" : {
+        "cursorPosition" : "15,29",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
