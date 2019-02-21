@@ -7,9 +7,7 @@ runtime: shiny
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-library(shiny);library(dplyr);library(magrittr);library(ggplot2);library(tidyr);
-library(stringi);library(scales);library(devtools);library(ggseg);
-library(scales);library(ggridges);library(devtools);library(purrr);library(astsa);library(DT)
+library(shiny);
 ```
 
 ## Virtual histology --- sometitle thingy {.tabset .tabset-fade}
