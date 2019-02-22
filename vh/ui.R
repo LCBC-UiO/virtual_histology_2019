@@ -38,7 +38,7 @@ vh <- shinyAppFile(appFile = "R/Shiny_VirtualHistology.R",
                    ))
 
 # Define UI for application that draws a histogram ----
-ui <- fluidPage(
+shinyUI(fluidPage(
   
   dashboardPage(
     title = "Virtual histology - Supplemental information",
@@ -65,4 +65,5 @@ ui <- fluidPage(
       p("some more text")
     )
   )
+)
 )
