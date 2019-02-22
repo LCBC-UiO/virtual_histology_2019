@@ -12,27 +12,27 @@ library(shinydashboard)
 height <- 900
 
 # Prep the files containing the tab code ----
-traj <- shinyAppFile(appFile = "../R/Shiny_cortical_trajectories.R",
+traj <- shinyAppFile(appFile = "R/Shiny_cortical_trajectories.R",
                      options = list(
                        width = "100%", height = height
                      ))
 
-gamms <- shinyAppFile(appFile = "../R/Shiny_GammStats.R",
+gamms <- shinyAppFile(appFile = "R/Shiny_GammStats.R",
                       options = list(
                         width = "100%", height = height
                       ))
 
-genes <- shinyAppFile(appFile = "../R/Shiny_genes.R",
+genes <- shinyAppFile(appFile = "R/Shiny_genes.R",
                       options = list(
                         width = "100%", height = height
                       ))
 
-go <- shinyAppFile(appFile = "../R/Shiny_GO.R",
+go <- shinyAppFile(appFile = "R/Shiny_GO.R",
                    options = list(
                      width = "100%", height = height
                    ))
 
-vh <- shinyAppFile(appFile = "../R/Shiny_VirtualHistology.R",
+vh <- shinyAppFile(appFile = "R/Shiny_VirtualHistology.R",
                    options = list(
                      width = "100%", height = height
                    ))
