@@ -9,9 +9,9 @@
 
 ###### loading data ######
 # .......................#
-library("shiny"); library("dplyr"); library("magrittr"); 
-library("ggplot2"); library("tidyr"); library("scales"); 
-library("ggridges"); library("purrr"); library("DT")
+library(shiny); library(dplyr); library(magrittr); 
+library(ggplot2); library(tidyr); library(scales); 
+library(ggridges); library(purrr); library(DT)
 library(ggseg); library(here)
 
 outdir <- here::here()
@@ -45,6 +45,7 @@ cth.deriv %<>%   dplyr::mutate(label = paste0("lh_", region))
 
 ggseg_brain <- ggseg::ggseg()
 ggseg_brain$data %<>%  dplyr::left_join(., cth.deriv)
+cth.deriv <-  %>% gather(Age, val, -label)
 
 # prepare thinning bar plotting
 db %<>% lapply(., stats::setNames, nm = varnames$region)
