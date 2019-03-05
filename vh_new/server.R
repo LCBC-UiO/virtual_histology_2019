@@ -6,7 +6,6 @@
 # 
 #    http://shiny.rstudio.com/
 #
-
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
@@ -16,10 +15,10 @@ shinyServer(function(input, output) {
     
     ggseg_cth_deriv %>% 
       filter(Age %in% input$vh_variable) %>% 
-    ggseg(
-          hemisphere = "left", 
-          mapping = aes(fill = val), 
-          color = "black") +
+      ggseg(
+        hemisphere = "left", 
+        mapping = aes(fill = val), 
+        color = "black") +
       scale_fill_gradient2("Thinning (mm/yr)",
                            low = "blue", 
                            high = "red", 
@@ -30,7 +29,7 @@ shinyServer(function(input, output) {
   
   # plot error bars
   output$plot_vh_bars <- renderPlot({
-    long.deriv %>% 
+    vh_long_deriv %>% 
       filter(Age == input$vh_variable) %>% 
       
       ggplot(mapping = aes(x = region, ders, group = region, fill = ders)) +
@@ -81,12 +80,13 @@ shinyServer(function(input, output) {
       res_Age[which(res_Age$CellType == i),"ymean"] <- ymean
     }
     
-    ggplot(data = ggdensity, aes(x=x, y=y, group=CellType, fill=CellType)) + 
+    ggdensity %>% 
+      ggplot(aes(x=x, y=y, group=CellType, fill=CellType)) + 
       geom_area(alpha=.8, color = "black") +
       geom_point(data = ggcloud, aes(x=corr, y=y, group=CellType, fill=CellType)) +  
       geom_area(data=ggshades, fill="black", alpha=.5) +
       geom_segment(data = res_Age, mapping = aes(x = r_corr, xend = r_corr, y = 0, yend = ymean), size = 1.5)  +
-      theme_ridges() +
+      theme_custom() +
       theme(legend.position = 'none', 
             panel.background = element_blank(),
             strip.background = element_blank(),
@@ -109,16 +109,16 @@ shinyServer(function(input, output) {
   # Traj ----
   # plot cth
   output$plot_traj_cth <- renderPlot({
-    ggplot(data = long.cth, 
+    ggplot(data = traj_long_cth, 
            mapping = aes(Age, 
                          cth, 
                          group = region)) + 
       geom_line() + 
-      geom_line(data = long.cth %>% 
+      geom_line(data = traj_long_cth %>% 
                   filter(region %in% input$traj_variable), 
                 mapping = aes(color = region),
                 size = 1) +
-      geom_ribbon(data = long.cth %>% 
+      geom_ribbon(data = traj_long_cth %>% 
                     filter(region %in% input$traj_variable),
                   mapping = aes( ymin = cth-cis, 
                                  ymax = cth+cis, 
@@ -132,18 +132,18 @@ shinyServer(function(input, output) {
   
   # plot derivative
   output$plot_traj_ders <- renderPlot({
-    ggplot(data = long.deriv, 
+    ggplot(data = traj_long_deriv, 
            mapping = aes(Age, 
                          ders, 
                          group = region)) + 
       geom_hline(yintercept = 0, 
                  linetype = 4) + 
       geom_line() + 
-      geom_line(data = long.deriv %>% 
+      geom_line(data = traj_long_deriv %>% 
                   filter(region %in% input$traj_variable), 
                 mapping = aes(color = region),
                 size = 1) +
-      geom_ribbon(data = long.deriv %>% 
+      geom_ribbon(data = traj_long_deriv %>% 
                     filter(region %in% input$traj_variable),
                   mapping = aes( ymin = ders-cis, 
                                  ymax = ders+cis, 
@@ -157,9 +157,10 @@ shinyServer(function(input, output) {
   # Gamm ----
   
   output$plot_gamms_geo <- renderPlot({
-    ggseg(atlas = ggseg_brain$data,  
-          hemisphere = "left", 
-          mapping = aes(fill = get(input$gamms_variable)), 
+    gamm.stats %>% 
+      filter(key %in% input$gamms_variable) %>% 
+    ggseg(hemisphere = "left", 
+          mapping = aes(fill = val), 
           color = "black") +
       scale_fill_gradient2("stat",
                            low = "blue", 
@@ -167,9 +168,10 @@ shinyServer(function(input, output) {
   })
   
   output$plot_gamms_bars <- renderPlot({
-    ggplot(data = gamm.stats, 
-           mapping = aes(x = label, y = get(input$gamms_variable), 
-                         group = label, fill = get(input$gamms_variable))) +
+    gamm.stats %>% 
+      filter(key %in% input$gamms_variable) %>% 
+      ggplot(aes(x = label, y = val, 
+                 group = label, fill = val)) +
       geom_hline(yintercept = 0, linetype = 4) +
       geom_col() +
       theme(axis.text.x=element_text(angle = -45, hjust = 0, size = 10))+
