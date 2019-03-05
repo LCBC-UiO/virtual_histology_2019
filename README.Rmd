@@ -9,4 +9,3 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LCBC-UiO/virtual_histology_2019/master?filepath=VH_didac.Rmd)

@@ -8,5 +8,5 @@ install.packages('purrr')
 install.packages('DT')
 install.packages("here")
 install.packages("devtools")
-devtools::install_github("LCBC-UiO/ggseg", build_vignettes = FALSE)
+devtools::install_github("LCBC-UiO/ggseg@9112c90", build_vignettes = FALSE)
 
