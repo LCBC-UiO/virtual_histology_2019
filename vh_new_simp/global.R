@@ -1,7 +1,7 @@
 library(shiny); library(shinydashboard);
-library(ggplot2); library(dplyr); 
-library(purrr); library(DT)
-library(ggseg);
+# library(ggplot2); library(dplyr); 
+# library(purrr); library(ggseg);
+library(DT)
 
 load("data/shinydata.rda")
 
