@@ -101,8 +101,8 @@ shinyServer(function(input, output) {
   })
   
   output$vh_tbl = renderDT(datatable(
-    tbl2plot, filter = list(position = 'top', plain = T), 
-    option = list( pageLength = 15, autoWidth = F)
+    tbl2plot_vh, filter = list(position = 'top', plain = T), 
+    option = list( pageLength = 15, autoWidth = F), 
   ))
   
   
@@ -183,13 +183,13 @@ shinyServer(function(input, output) {
   
   # Genes ----
   output$genes_tbl = renderDT(datatable(
-    tbl2plot, filter = list(position = 'top', plain = T), 
+    tbl2plot_gene, filter = list(position = 'top', plain = T), 
     option = list( pageLength = 15, autoWidth = F)
   ))
   
   # GO ----
   output$go_tbl = renderDT(datatable(
-    tbl2plot, filter = list(position = 'top', plain = T), 
+    tbl2plot_go, filter = list(position = 'top', plain = T), 
     option = list( pageLength = 15, autoWidth = F)
   ))
   
