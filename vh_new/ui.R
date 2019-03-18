@@ -8,7 +8,7 @@ shinyUI(
   fluidPage(
     
     dashboardPage(
-      title = "Virtual histology - Supplemental information",
+      title = "Virtual histology -Supporting materials",
       dashboardHeader(title = "Virtual histology"),
       dashboardSidebar(
         sidebarMenu(
@@ -24,7 +24,7 @@ shinyUI(
         )
       ),      
       dashboardBody(
-        h2("some text"),
+        h1("Cellular correlates of cortical thinning throughout the lifespan - Supporting materials"),
         tabItems(
           tabItem(tabName = "vh", 
                   fluidPage(
@@ -73,7 +73,7 @@ shinyUI(
                     DTOutput('go_tbl')
                   ))
         ),
-        p("some more text")
+        p("See Methods and Materials for more information.")
       )
     )
   )
