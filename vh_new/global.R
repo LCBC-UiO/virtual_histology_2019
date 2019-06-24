@@ -4,6 +4,9 @@ library(purrr); library(DT)
 library(ggseg);
 
 load("data/shinydata.rda")
+load("data/db.all.Rda")
+
+gene_trajs = unique(gene_traj_db$gene)
 
 # Some steals to avoid package installs when only using single func
 # Stolen from ggridges: https://github.com/clauswilke/ggridges/blob/master/R/theme.R

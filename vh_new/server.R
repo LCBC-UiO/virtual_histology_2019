@@ -181,6 +181,82 @@ shinyServer(function(input, output) {
                            high = "red")
   })
   
+  # Gene trajectories ----
+  gene_traj_i <- reactive({
+    which(gene_traj_db$gene %in% input$variable)
+  })
+  
+  gene_traj_plot <- eventReactive(input$variable, {
+    data.frame(deriv = as.vector(t(gene_traj_db$deriv[gene_traj_i(),])), 
+               se.deriv = as.vector(t(gene_traj_db$se_deriv[gene_traj_i(),])), 
+               fit = as.vector(t(db$fit[gene_traj_i(),])), 
+               se.fit = as.vector(t(gene_traj_db$se_fit[gene_traj_i(),])),
+               gene = rep(gene_traj_db$gene[gene_traj_i()], each = 500), 
+               age = rep(gene_traj_db$age,length(gene_traj_i())))
+  })
+  
+  gene_traj_table <- eventReactive(input$variable, {
+    db$stats %>% 
+      dplyr::filter(gene %in% input$variable) %>% 
+      as.data.frame() %>% 
+      mutate(value = round(value, 2))
+  })
+  
+  
+  output$gene_traj_gene <- renderPlot({
+    ggplot(data = gene_traj_plot(), 
+           mapping = aes(x = age, 
+                         y = fit, 
+                         group = gene,
+                         fill = gene, 
+                         color = gene)) + 
+      #geom_hline(yintercept = 0, color = "red", linetype = 4, size = 2) +
+      geom_ribbon(mapping = aes(ymin = fit-1.96*se.fit, 
+                                ymax = fit+1.96*se.fit),
+                  alpha = .35) +
+      geom_line(size = 2) + 
+      theme_classic() +
+      theme(#legend.position = "none",
+        plot.title = element_text(hjust = 0.5, size = 20),
+        axis.title = element_text(size = 16, face = "bold"),
+        axis.text = element_text(size = 16),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 14, face = "bold"))+
+      ylab("Trajectory (Z-norm.)") +
+      xlab("Age")
+  })
+  
+  # plot derivative
+  output$gene_traj_ders <- renderPlot({
+    ggplot(data = gene_traj_plot(), 
+           mapping = aes(x = age, 
+                         y = deriv, 
+                         group = gene,
+                         fill = gene, 
+                         color = gene)) + 
+      geom_hline(yintercept = 0, color = "red", linetype = 4, size = 2) +
+      geom_ribbon(mapping = aes(ymin = deriv-1.96*se.deriv, 
+                                ymax = deriv+1.96*se.deriv), 
+                  alpha = .35) +
+      geom_line(size = 2) + 
+      theme_classic() +
+      theme(#legend.position = "none",
+        plot.title = element_text(hjust = 0.5, size = 20),
+        axis.title = element_text(size = 16, face = "bold"),
+        axis.text = element_text(size = 16),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 14), face = "bold")+
+      ylab("Derivative (Z/yr)") +
+      xlab("Age")
+    
+  })
+  
+  output$gene_traj_tbl = renderDT(datatable(gene_traj_table(), 
+                                  filter = list(position = 'top', plain = T), 
+                                  option = list( pageLength = 15, autoWidth = F)))  
+  
+  
+  
   # Genes ----
   output$genes_tbl = renderDT(datatable(
     tbl2plot_gene, filter = list(position = 'top', plain = T), 

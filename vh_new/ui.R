@@ -15,6 +15,7 @@ shinyUI(
           menuItem("Virtual histology", tabName = "vh", icon = icon("dashboard")),
           menuItem("Trajectories", tabName = "traj", icon = icon("chart-line")),
           menuItem("GAMMS", tabName = "gamms", icon = icon("chart-line")),
+          menuItem("Gene trajectories", tabName = "genetraj", icon = icon("chart-line")),
           menuItem("Genes", tabName = "genes", icon = icon("table")),
           menuItem("Go", tabName = "go", icon = icon("table"))
         ),
@@ -58,24 +59,38 @@ shinyUI(
                     fluidRow(plotOutput("plot_gamms_bars"))
                   )),
           
-          tabItem(tabName = "genes", 
+          tabItem(tabName = "genetraj", 
                   fluidPage(
-                    fluidRow(titlePanel("GO enrichment analyses")),
-                    fluidRow(h5("This table is inculded for sake of completeness.", style="color:red")),
-                    fluidRow(h5("See Methods and materials to consult the specific analysis, including critical values for cth and age regulation analyses", style="color:red")),
-                    
-                    DTOutput('genes_tbl')
+                    fluidRow(titlePanel("Gene Expression trajectories across the lifespan"),
+                             selectInput("variable", "Gene (select one or more):", gene_trajs, multiple = TRUE, selected = "A1BG")),
+                    fluidRow(h5("Error bars represent 95% CI of the trajectories", style="color:red")),
+                    fluidRow(plotOutput("gene_traj_gene")),
+                    fluidRow(plotOutput("gene_traj_ders")),
+                    fluidRow(h5("main stats from GAMM fittings", style="color:red")),
+                    DTOutput('gene_traj_tbl')
                   )),
-          tabItem(tabName = "go", 
-                  fluidPage(
-                    fluidRow(titlePanel("GO enrichment analyses")),
-                    fluidRow(h5("This table is inculded for sake of completeness. See Methods and materials to consult the specific analysis", style="color:red")),
-                    DTOutput('go_tbl')
-                  ))
-        ),
-        p("See Methods and Materials for more information.")
+                  
+                  tabItem(tabName = "genes", 
+                          fluidPage(
+                            fluidRow(titlePanel("GO enrichment analyses")),
+                            fluidRow(h5("This table is inculded for sake of completeness.", style="color:red")),
+                            fluidRow(h5("See Methods and materials to consult the specific analysis, including critical values for cth and age regulation analyses", style="color:red")),
+                            
+                            DTOutput('genes_tbl')
+                          )),
+          
+                  tabItem(tabName = "go", 
+                          fluidPage(
+                            fluidRow(titlePanel("GO enrichment analyses")),
+                            fluidRow(h5("This table is inculded for sake of completeness. See Methods and materials to consult the specific analysis", style="color:red")),
+                            DTOutput('go_tbl')
+                          ))
+          ),
+          p("See Methods and Materials for more information.")
+        )
       )
     )
+    
   )
   
-)
+  
