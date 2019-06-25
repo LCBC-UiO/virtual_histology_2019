@@ -201,7 +201,7 @@ shinyServer(function(input, output) {
                se.deriv = as.vector(t(gene_traj_db$se_deriv[gene_traj_i(),])), 
                fit = as.vector(t(gene_traj_db$fit[gene_traj_i(),])), 
                se.fit = as.vector(t(gene_traj_db$se_fit[gene_traj_i(),])),
-               gene = rep(gene_traj_db$gene[gene_traj_i()], each = 500), 
+               gene = rep(gene_traj_db$gene[gene_traj_i()], each = 100), 
                age = rep(gene_traj_db$age,length(gene_traj_i())))
   })
   
