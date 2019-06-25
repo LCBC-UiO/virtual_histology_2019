@@ -158,7 +158,7 @@ shinyServer(function(input, output) {
   })
   
   output$plot_traj_brain <- renderPlot({
-    dkt %>% 
+    ggseg::dkt %>% 
       filter(label %in% paste0("lh_", input$traj_variable)) %>% 
       mutate(region = gsub("lh_", "", label)) %>% 
       ggseg(mapping=aes(fill=region), hemisphere = "left")
