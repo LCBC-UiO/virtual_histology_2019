@@ -3,8 +3,7 @@ library(ggplot2); library(dplyr); library(tidyr)
 library(purrr); library(DT)
 library(ggseg);
 
-load("data/shinydata.rda")
-load("data/db.all.Rda")
+load("data/shinydata2.rda")
 
 gene_trajs = unique(gene_traj_db$gene)
 

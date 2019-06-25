@@ -127,7 +127,8 @@ shinyServer(function(input, output) {
       theme(axis.text = element_text(size = 16), 
             axis.title = element_text(size = 16, 
                                       face ="bold")) +
-      scale_y_continuous(name ="cortical thickness (mm)") 
+      scale_y_continuous(name ="cortical thickness (mm)",
+                         labels = scales::number_format(accuracy = 0.01)) 
   })
   
   # plot derivative
@@ -152,16 +153,25 @@ shinyServer(function(input, output) {
       theme(axis.text = element_text(size = 16), 
             axis.title = element_text(size = 16, 
                                       face ="bold")) +
-      scale_y_continuous(name ="thickening/thinning (mm/yr)") 
+      scale_y_continuous(name ="thickening/thinning (mm/yr)",
+                         labels = scales::number_format(accuracy = 0.01)) 
   })
+  
+  output$plot_traj_brain <- renderPlot({
+    dkt %>% 
+      filter(label %in% paste0("lh_", input$traj_variable)) %>% 
+      mutate(region = gsub("lh_", "", label)) %>% 
+      ggseg(mapping=aes(fill=region), hemisphere = "left")
+  })
+  
   # Gamm ----
   
   output$plot_gamms_geo <- renderPlot({
     gamm.stats %>% 
       filter(key %in% input$gamms_variable) %>% 
-    ggseg(hemisphere = "left", 
-          mapping = aes(fill = val), 
-          color = "black") +
+      ggseg(hemisphere = "left", 
+            mapping = aes(fill = val), 
+            color = "black") +
       scale_fill_gradient2("stat",
                            low = "blue", 
                            high = "red")
@@ -189,17 +199,18 @@ shinyServer(function(input, output) {
   gene_traj_plot <- eventReactive(input$variable, {
     data.frame(deriv = as.vector(t(gene_traj_db$deriv[gene_traj_i(),])), 
                se.deriv = as.vector(t(gene_traj_db$se_deriv[gene_traj_i(),])), 
-               fit = as.vector(t(db$fit[gene_traj_i(),])), 
+               fit = as.vector(t(gene_traj_db$fit[gene_traj_i(),])), 
                se.fit = as.vector(t(gene_traj_db$se_fit[gene_traj_i(),])),
                gene = rep(gene_traj_db$gene[gene_traj_i()], each = 500), 
                age = rep(gene_traj_db$age,length(gene_traj_i())))
   })
   
   gene_traj_table <- eventReactive(input$variable, {
-    db$stats %>% 
+    gene_traj_db$stats %>% 
       dplyr::filter(gene %in% input$variable) %>% 
-      as.data.frame() %>% 
-      mutate(value = round(value, 2))
+      as_data_frame() %>% 
+      mutate(value = round(value, 2)) %>% 
+      tidyr::spread(stats, value)
   })
   
   
@@ -223,7 +234,9 @@ shinyServer(function(input, output) {
         legend.text = element_text(size = 14),
         legend.title = element_text(size = 14, face = "bold"))+
       ylab("Trajectory (Z-norm.)") +
-      xlab("Age")
+      xlab("Age") +
+      scale_y_continuous(
+        labels = scales::number_format(accuracy = 0.01))
   })
   
   # plot derivative
@@ -245,15 +258,22 @@ shinyServer(function(input, output) {
         axis.title = element_text(size = 16, face = "bold"),
         axis.text = element_text(size = 16),
         legend.text = element_text(size = 14),
-        legend.title = element_text(size = 14), face = "bold")+
+        legend.title = element_text(size = 14, face = "bold"))+
       ylab("Derivative (Z/yr)") +
-      xlab("Age")
-    
+      xlab("Age")+ 
+      scale_y_continuous(
+        labels = scales::number_format(accuracy = 0.01))
   })
   
-  output$gene_traj_tbl = renderDT(datatable(gene_traj_table(), 
-                                  filter = list(position = 'top', plain = T), 
-                                  option = list( pageLength = 15, autoWidth = F)))  
+  output$gene_traj_tbl = renderDT({
+    dt <- gene_traj_table()
+    dt[nrow(dt)+1,] <- NA
+    
+    datatable(dt, 
+              filter = list(position = 'top', plain = TRUE), 
+              option = list( pageLength = 15, autoWidth = FALSE,
+                             scrollX = TRUE))
+  })  
   
   
   

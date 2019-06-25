@@ -27,29 +27,35 @@ shinyUI(
       dashboardBody(
         h1("Cellular correlates of cortical thinning throughout the lifespan - Supporting materials"),
         tabItems(
+          
+          # VH ----
           tabItem(tabName = "vh", 
                   fluidPage(
                     fluidRow(
                       titlePanel("Cortical thickening/thinning at a given age"),
                       column(6,
                              selectInput("vh_variable", "Age:", AgeU, multiple = FALSE),
-                             textOutput("Age_at"))),
+                             h4(textOutput("Age_at")))),
                     fluidRow(plotOutput("plot_vh_geo")),
                     fluidRow(plotOutput("plot_vh_bars")),
                     fluidRow(plotOutput("plot_vh_VH")),
                     DTOutput('vh_tbl')
                   )),
           
+          # Traj ----
           tabItem(tabName = "traj", 
                   fluidPage(
-                    fluidRow(titlePanel("Cortical thickness and thickening/thinning trajectories across the lifespan"),
-                             selectInput("traj_variable", "Cortical Regions (select one or more):", 
-                                         region, multiple = TRUE, selected = "entorhinal")),
-                    fluidRow(h5("Error bars represent 95% CI of the trajectories", style="color:red")),
+                    fluidRow(titlePanel("Cortical thickness and thickening/thinning trajectories across the lifespan")),
+                    fluidRow(column(6,
+                                    selectInput("traj_variable", "Cortical Regions (select one or more):", 
+                                                region, multiple = TRUE, selected = "entorhinal")),
+                             column(6, plotOutput("plot_traj_brain", height = "200px"))),
+                    fluidRow(h5("Error bars represent 95% CI of the trajectories", style="font-weight: bold; color:grey")),
                     fluidRow(plotOutput("plot_traj_cth")),
                     fluidRow(plotOutput("plot_traj_ders"))
                   )),
           
+          # Gamms ----
           tabItem(tabName = "gamms", 
                   fluidPage(
                     fluidRow(titlePanel("GAMM model statistics"),
@@ -59,38 +65,41 @@ shinyUI(
                     fluidRow(plotOutput("plot_gamms_bars"))
                   )),
           
+          # Gene traj ----
           tabItem(tabName = "genetraj", 
                   fluidPage(
                     fluidRow(titlePanel("Gene Expression trajectories across the lifespan"),
                              selectInput("variable", "Gene (select one or more):", gene_trajs, multiple = TRUE, selected = "A1BG")),
-                    fluidRow(h5("Error bars represent 95% CI of the trajectories", style="color:red")),
+                    fluidRow(h5("Error bars represent 95% CI of the trajectories", style="font-weight: bold; color:grey")),
                     fluidRow(plotOutput("gene_traj_gene")),
                     fluidRow(plotOutput("gene_traj_ders")),
-                    fluidRow(h5("main stats from GAMM fittings", style="color:red")),
+                    fluidRow(h5("main stats from GAMM fittings", style="font-weight: bold; color:grey")),
                     DTOutput('gene_traj_tbl')
                   )),
-                  
-                  tabItem(tabName = "genes", 
-                          fluidPage(
-                            fluidRow(titlePanel("GO enrichment analyses")),
-                            fluidRow(h5("This table is inculded for sake of completeness.", style="color:red")),
-                            fluidRow(h5("See Methods and materials to consult the specific analysis, including critical values for cth and age regulation analyses", style="color:red")),
-                            
-                            DTOutput('genes_tbl')
-                          )),
           
-                  tabItem(tabName = "go", 
-                          fluidPage(
-                            fluidRow(titlePanel("GO enrichment analyses")),
-                            fluidRow(h5("This table is inculded for sake of completeness. See Methods and materials to consult the specific analysis", style="color:red")),
-                            DTOutput('go_tbl')
-                          ))
-          ),
-          p("See Methods and Materials for more information.")
-        )
+          # Genes ----
+          tabItem(tabName = "genes", 
+                  fluidPage(
+                    fluidRow(titlePanel("GO enrichment analyses")),
+                    fluidRow(h5("This table is inculded for sake of completeness.", style="font-weight: bold; color:grey")),
+                    fluidRow(h5("See Methods and materials to consult the specific analysis, including critical values for cth and age regulation analyses", style="font-weight: bold; color:grey")),
+                    
+                    DTOutput('genes_tbl')
+                  )),
+          
+          # Go ----
+          tabItem(tabName = "go", 
+                  fluidPage(
+                    fluidRow(titlePanel("GO enrichment analyses")),
+                    fluidRow(h5("This table is inculded for sake of completeness. See Methods and materials to consult the specific analysis", style="font-weight: bold; color:grey")),
+                    DTOutput('go_tbl')
+                  ))
+        ),
+        p("See Methods and Materials for more information.")
       )
     )
-    
   )
   
-  
+)
+
+
