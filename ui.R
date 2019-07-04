@@ -59,8 +59,8 @@ shinyUI(
           tabItem(tabName = "gamms", 
                   fluidPage(
                     fluidRow(titlePanel("GAMM model statistics"),
-                             column(6,
-                                    selectInput("gamms_variable", "Select statistic of interest:", stat, multiple = FALSE))),
+                             column(6, selectInput("gamms_variable", "Select statistic of interest:", 
+                                                stat, multiple = FALSE))),
                     fluidRow(plotOutput("plot_gamms_geo")),
                     fluidRow(plotOutput("plot_gamms_bars"))
                   )),
@@ -69,8 +69,12 @@ shinyUI(
           tabItem(tabName = "genetraj", 
                   fluidPage(
                     fluidRow(titlePanel("Gene Expression trajectories across the lifespan"),
-                             selectInput("variable", "Gene (select one or more):", gene_trajs, multiple = TRUE, selected = "A1BG")),
-                    fluidRow(h5("Error bars represent 95% CI of the trajectories", style="font-weight: bold; color:grey")),
+                             column(4,selectInput("Filter", "Filter (expression change age group)", 
+                                                  c("None", "Young", "Old"), selected = "None"), offsett = 5),
+                             column(4,selectInput("Filter2", "Filter (interregional consistent)", 
+                                                  c("None", "Consistent"), selected = "None"), offsett = 9),
+                             column(4,selectInput("variable", "Gene (select one or more):", 
+                                                  gene_trajs, multiple = TRUE, selected = "A1BG"), offset = 0)),                    fluidRow(h5("Error bars represent 95% CI of the trajectories", style="font-weight: bold; color:grey")),
                     fluidRow(plotOutput("gene_traj_gene")),
                     fluidRow(plotOutput("gene_traj_ders")),
                     fluidRow(h5("main stats from GAMM fittings", style="font-weight: bold; color:grey")),

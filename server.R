@@ -7,7 +7,7 @@
 #    http://shiny.rstudio.com/
 #
 # Define server logic required to draw a histogram
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   # VH ----
   # plot brain image
@@ -68,7 +68,7 @@ shinyServer(function(input, output) {
       group_by(CellType) %>% 
       nest() %>% 
       mutate(data = map(data, ~with(density(.$corr), data.frame(x,y)))) %>% 
-      unnest()
+      unnest(cols = c(data))
     ggshades <- data.frame()
     
     for(i in unique(res_tab$CellType)){
@@ -275,7 +275,41 @@ shinyServer(function(input, output) {
                              scrollX = TRUE))
   })  
   
+  filt.change <- reactive({
+    idx <- c()
+    idx2 <- c()
+    
+    if(input$Filter2 == "Consistent") {
+      idx <- which(db$consistent == 0)
+    }
+    
+    if(input$Filter == "Young") { 
+      idx2 <- which(db$Young.Bin == 0)
+    }
+    if(input$Filter == "Old") { 
+      idx2 <- which(db$Old.Bin == 0)
+    }
+    
+    idx3 <- unique(c(idx, idx2))
+    
+    if(length(idx3) > 0) {
+      tmp.gene <- gene_trajs[-idx3]
+    } else {tmp.gene <- gene_trajs}
+    
+    tmp.gene
+  })
   
+  gene_traj_filts <- reactive({
+    filt.change()
+  })
+  
+
+  observe({
+    print(input$variable)
+    updateSelectInput(session, 'variable', 
+                      choices = gene_traj_filts(), 
+                      selected = gene_traj_filts()[1])
+    })
   
   # Genes ----
   output$genes_tbl = renderDT(datatable(
