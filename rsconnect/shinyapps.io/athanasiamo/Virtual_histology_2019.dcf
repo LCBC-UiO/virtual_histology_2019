@@ -5,9 +5,9 @@ account: athanasiamo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 796288
-bundleId: 2178317
+bundleId: 2200585
 url: https://athanasiamo.shinyapps.io/Virtual_histology_2019/
-when: 1561499324.79891
+when: 1562266214.02816
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .gitattributes|install.R|README.md|README.Rmd|runtime.txt|..bfg-report|data-raw
+ignoredFiles: .gitattributes|install.R|README.md|README.Rmd|runtime.txt|data/shinydata.rda|..bfg-report

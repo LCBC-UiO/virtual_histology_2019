@@ -299,16 +299,9 @@ shinyServer(function(input, output, session) {
     tmp.gene
   })
   
-  gene_traj_filts <- reactive({
-    filt.change()
-  })
-  
-
   observe({
-    print(input$variable)
-    updateSelectInput(session, 'variable', 
-                      choices = gene_traj_filts(), 
-                      selected = gene_traj_filts()[1])
+    ch <- filt.change()
+    updateSelectInput(session, 'variable', choices = ch, selected = ch[1])
     })
   
   # Genes ----
