@@ -15,8 +15,8 @@ shinyUI(
           menuItem("Trajectories", tabName = "traj", icon = icon("chart-line")),
           menuItem("GAMMS", tabName = "gamms", icon = icon("chart-line")),
           menuItem("Gene trajectories", tabName = "genetraj", icon = icon("chart-line")),
-          menuItem("Genes", tabName = "genes", icon = icon("table")),
-          menuItem("Go", tabName = "go", icon = icon("table"))
+          menuItem("Genes", tabName = "genes", icon = icon("table"))#,
+       #   menuItem("Go", tabName = "go", icon = icon("table"))
         ),
         helpText("Created by Didac Vidal Piñeiro"),
         tags$a(href='https://www.oslobrains.no/',

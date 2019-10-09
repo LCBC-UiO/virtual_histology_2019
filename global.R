@@ -5,6 +5,8 @@ library(ggseg);
 
 load("data/shinydata2.rda")
 
+tbl2plot_gene <- 
+  select(tbl2plot_gene, -starts_with("Reg"))
 
 # Specify some values
 gene_trajs = unique(gene_traj_db$gene)
