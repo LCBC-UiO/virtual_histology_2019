@@ -7,7 +7,7 @@ shinyUI(
   fluidPage(
     
     dashboardPage(
-      title = "Virtual histology -Supporting materials",
+      title = "Virtual histology - Supporting materials",
       dashboardHeader(title = "Virtual histology"),
       dashboardSidebar(
         sidebarMenu(

@@ -9,7 +9,9 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LCBC-UiO/virtual_histology_2019/master?urlpath=rstudio%2F)
+<!-- badges: start -->
+[![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LCBC-UiO/virtual_histology_2019/master?urlpath=rstudio)
+<!-- badges: end -->
 
 Open Rstudio in Binder. Open the `ui.R` file and `Run App` in the top right hand side of the script to launch the shiny app.
 
